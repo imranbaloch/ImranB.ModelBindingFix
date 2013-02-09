@@ -190,14 +190,13 @@ namespace ImranB.ModelBindingFix
 
             public int Compare(string x, string y)
             {
-                x = x.Replace(" ", "");
-                string testString = Object.ReferenceEquals(x, _prefix) ? y : x;
+                string testString = Object.ReferenceEquals(x.Replace(" ", ""), _prefix) ? y : x.Replace(" ", "");
                 if (IsPrefixMatch(_prefix, testString))
                 {
                     return 0;
                 }
 
-                return StringComparer.OrdinalIgnoreCase.Compare(x, y);
+                return StringComparer.OrdinalIgnoreCase.Compare(x, y.Replace("[", " ["));
             }
         }
     }
