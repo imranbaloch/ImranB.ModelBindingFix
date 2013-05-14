@@ -28,9 +28,16 @@ namespace ImranB.ModelBindingFix.SystemWebMvc
             IList l = value as IList;
             if (l != null)
             {
-                for (int i = 0; i < l.Count; i++)
+                if (l.Count != 0)
                 {
-                    AddToBackingStore(backingStore, MakeArrayKey(prefix, i), l[i]);
+                    for (int i = 0; i < l.Count; i++)
+                    {
+                        AddToBackingStore(backingStore, MakeArrayKey(prefix, i), l[i]);
+                    }
+                }
+                else
+                {
+                    backingStore.Add(prefix, value);
                 }
                 return;
             }
